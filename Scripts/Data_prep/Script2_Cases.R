@@ -1,0 +1,140 @@
+# Script 2: Load case data and randomize
+#Uncomment library if running alone
+#library(sf)
+
+# Cases by County ---------------------------------------------------------
+
+# case_pdf_url:
+# "https://www.health.ny.gov/statistics/diseases/communicable/2017/docs/cases.pdf"
+
+case_df = data.frame(County = c("Albany",
+                                "Allegany",
+                                "Broome",
+                                "Cattaraugus",
+                                "Cayuga",
+                                "Chautauqua",
+                                "Chemung",
+                                "Chenango",
+                                "Clinton",
+                                "Columbia",
+                                "Cortland",
+                                "Delaware",
+                                "Dutchess",
+                                "Erie",
+                                "Essex",
+                                "Franklin",
+                                "Fulton",
+                                "Genesee",
+                                "Greene",
+                                "Hamilton",
+                                "Herkimer",
+                                "Jefferson",
+                                "Lewis",
+                                "Livingston",
+                                "Madison",
+                                "Monroe",
+                                "Montgomery",
+                                "Nassau",
+                                "Niagara",
+                                "Oneida",
+                                "Onondaga",
+                                "Ontario",
+                                "Orange",
+                                "Orleans",
+                                "Oswego",
+                                "Otsego",
+                                "Putnam",
+                                "Rensselaer",
+                                "Rockland",
+                                "St. Lawrence",
+                                "Saratoga",
+                                "Schenectady",
+                                "Schoharie",
+                                "Schuyler",
+                                "Seneca",
+                                "Steuben",
+                                "Suffolk",
+                                "Sullivan",
+                                "Tioga",
+                                "Tompkins",
+                                "Ulster",
+                                "Warren",
+                                "Washington",
+                                "Wayne",
+                                "Westchester",
+                                "Wyoming",
+                                "Yates"),
+                     Cases = c(102,
+                               0,
+                               7,
+                               0,
+                               0,
+                               0,
+                               1,
+                               1,
+                               2,
+                               137,
+                               0,
+                               3,
+                               107,
+                               0,
+                               13,
+                               2,
+                               5,
+                               0,
+                               39,
+                               0,
+                               2,
+                               0,
+                               0,
+                               0,
+                               0,
+                               0,
+                               6,
+                               6,
+                               0,
+                               1,
+                               1,
+                               0,
+                               51,
+                               0,
+                               0,
+                               2,
+                               29,
+                               168,
+                               7,
+                               6,
+                               126,
+                               16,
+                               11,
+                               0,
+                               0,
+                               0,
+                               31,
+                               5,
+                               1,
+                               5,
+                               76,
+                               8,
+                               101,
+                               1,
+                               33,
+                               0,
+                               0))
+
+# Sample by county --------------------------------------------------------
+
+non_NYC_Counties = NYS_Counties %>%
+  filter(NAME%in%case_df$County) %>%
+  left_join(.,case_df,by=c('NAME'='County'))
+
+sample_cases = st_sample(non_NYC_Counties,size=non_NYC_Counties$Cases) %>%
+  st_as_sf()
+
+# For viewing:
+
+# library(tmap)
+# tm_shape(NYS_Counties)+
+#   tm_borders()+
+# tm_shape(sample_cases)+
+#   tm_dots()
