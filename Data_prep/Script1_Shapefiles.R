@@ -26,7 +26,17 @@ NYS_Counties = USA_Counties %>%
   filter(STATEFP=="36") %>%
   st_transform(.,crs=32618)
 
+NYC_County_names = c("Kings","Queens","Bronx","Richmond","New York")
+NYC_Counties = NYS_Counties %>%
+  filter(NAME%in%NYC_County_names)
 
+NYS_Counties_ex_NYC = NYS_Counties %>%
+  filter(!c(NAME%in%NYC_County_names))
+
+NYS_ex_NYC = NYS_Counties_ex_NYC %>%
+  st_union() %>%
+  st_sfc() %>%
+  st_as_sf()
 # USA ZCTAs ---------------------------------------------------------------
 
 if(file.exists(paste(tdir,"/Crosswalk.xlsx",sep=""))==F){

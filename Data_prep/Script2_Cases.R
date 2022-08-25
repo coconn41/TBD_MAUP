@@ -1,6 +1,6 @@
 # Script 2: Load case data and randomize
-#Uncomment library if running alone
-#library(sf)
+
+library(sf)
 
 # Cases by County ---------------------------------------------------------
 
