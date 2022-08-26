@@ -1,9 +1,11 @@
 # TBD_MAUP
 
-## This is a repository that provides all necessary code to recreate the analysis in the JME publication _ using *publically available* data. Specifically:
+## This is a repository that provides all necessary code to recreate the analysis in the JME publication _ using **publically available** data. Specifically:
 
 - Tick sampling data is aggregated to the county level, thus, kriging interpolations use county centroids.
 - Case data uses counts of anaplasmosis aggregated to the county level, which are then randomly placed within the county.
+
+## The data used in the published manuscript is protected data and may be made available upon reasonable request.
 
 #### Scripts are numbered according to what must be run **prior** to running the simulation script (Script 8).
 #### Certain analyses do not require all scripts before them to be run. 
