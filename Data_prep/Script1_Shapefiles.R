@@ -56,6 +56,21 @@ NYS_ZCTAs = USA_ZCTAs %>%
   filter(ZCTA5CE10 %in% NYS_Converter$ZCTA) %>%
   st_transform(.,crs=32618)
 
+NYC_ZCTA_list = NYS_ZCTAs %>%
+  st_intersection(NYC_Counties) %>%
+  dplyr::select(ZCTA5CE10) %>%
+  st_drop_geometry() %>%
+  filter(!c(ZCTA5CE10%in%c("10705","10704","10550","10803","11021","11020",
+                           "11042","11040","11001","11003","11580","11581",
+                           "11096","11559","11509")))
+
+NYC_ZCTA_list = NYC_ZCTA_list$ZCTA5CE10
+
+NYC_ZCTAs = NYS_ZCTAs %>%
+  filter(ZCTA5CE10%in%NYC_ZCTA_list)
+NYS_ZCTAs_ex_NYC = NYS_ZCTAs %>%
+  filter(!c(ZCTA5CE10%in%NYC_ZCTA_list))
+
 # USA Congressional Districts ---------------------------------------------
 
 if(file.exists(paste(tdir,"/cb_2018_us_cd116_500k.shp",sep=""))==F){
