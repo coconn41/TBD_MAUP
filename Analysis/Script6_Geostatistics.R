@@ -1,6 +1,10 @@
 library(gstat)
 library(automap)
 library(raster)
+source(paste(getwd(),"/Data_prep/Script1_Shapefiles.R",sep=""))
+source(paste(getwd(),"/Data_prep/Script2_Cases.R",sep=""))
+source(paste(getwd(),"/Data_prep/Script3_ERI.R",sep=""))
+source(paste(getwd(),"/Data_prep/Script4_DEM_kriging_prep.R",sep=""))
 
 Density_df = Kriging_df %>%
   st_as_sf(.,coords=c('x','y')) %>%
@@ -36,6 +40,8 @@ proj4string(Prevalence_predictions)=CRS("+proj=longlat +ellps=WGS84 +datum=WGS84
 proj4string(Prevalence_predictions)=CRS("+proj=utm +zone=18 +datum=NAD83 +units=m +no_defs")
 
 OK_ERI = Density_predictions*Prevalence_predictions
+OK_ERI = mask(OK_ERI,NYS_ex_NYC)
+
 
 # Universal Kriging models ------------------------------------------------
 UK_Density_variogram=autofitVariogram(Tick_density~layer,
@@ -61,3 +67,4 @@ proj4string(UK_Prevalence_predictions)=CRS("+proj=longlat +ellps=WGS84 +datum=WG
 proj4string(UK_Prevalence_predictions)=CRS("+proj=utm +zone=18 +datum=NAD83 +units=m +no_defs")
 
 UK_ERI = UK_Density_predictions*UK_Prevalence_predictions
+UK_ERI = mask(UK_ERI,NYS_ex_NYC)
