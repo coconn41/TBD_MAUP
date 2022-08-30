@@ -1,10 +1,6 @@
 library(gstat)
 library(automap)
 library(raster)
-source(paste(getwd(),"/Data_prep/Script1_Shapefiles.R",sep=""))
-source(paste(getwd(),"/Data_prep/Script2_Cases.R",sep=""))
-source(paste(getwd(),"/Data_prep/Script3_ERI.R",sep=""))
-source(paste(getwd(),"/Data_prep/Script4_DEM_kriging_prep.R",sep=""))
 
 Density_df = Kriging_df %>%
   st_as_sf(.,coords=c('x','y')) %>%

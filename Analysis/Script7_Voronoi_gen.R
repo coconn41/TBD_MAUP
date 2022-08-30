@@ -4,7 +4,6 @@ library(dplyr)
 library(sp)
 library(tmap)
 library(dismo)
-source(paste(getwd(),"/Data_prep/Script1_Shapefiles.R",sep=""))
 
 Gen_V_polys = function(n2,p){
   p2 = as(p,Class='Spatial')

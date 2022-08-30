@@ -1,9 +1,3 @@
-# Sources scripts 1-4
-source(paste(getwd(),"/Analysis/Script6_Geostatistics.R",sep=""))
-source(paste(getwd(),"/Data_prep/Script5_Worldpop.R",sep=""))
-# Warning: Will source script 1 again
-source(paste(getwd(),"/Analysis/Script7_Voronoi_gen.R",sep=""))
-
 library(spdep)
 library(exactextractr)
 
