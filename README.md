@@ -1,6 +1,6 @@
 # TBD_MAUP
 
-## This is a repository that provides all necessary code to recreate the analysis in a publication currently submitted to the Journal of Medical Entomology, using publically available data. Specifically:
+## This is a repository that provides all necessary code to recreate the analysis in a publication currently submitted to the Journal of Medical Entomology using publically available data. Specifically:
 
 - Tick sampling data is aggregated to the county level, thus, kriging interpolations use county centroids.
 - Case data uses counts of anaplasmosis aggregated to the county level, which are then randomly placed within the county.
