@@ -5,7 +5,7 @@
 - Tick sampling data is aggregated to the county level, thus, kriging interpolations use county centroids.
 - Case data uses counts of anaplasmosis aggregated to the county level, which are then randomly placed within the county.
 
-## The data used in the published manuscript is protected data and may be made available upon reasonable request.
+## The data used in the published manuscript are protected data and may be made available upon reasonable request.
 
 ### Other notes:
 
