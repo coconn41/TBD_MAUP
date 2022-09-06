@@ -3,7 +3,6 @@ library(dplyr)
 library(ggplot2)
 library(tmaptools)
 
-#Full_sim <- read_csv("MAUP/Results/Double_Corr_simulation.csv")
 Full_sim <- read_csv(paste(getwd(),"/Results/Corr_simulation.csv",sep=""))
 Trues <- read_csv(paste(getwd(),"/Results/True_polygons.csv",sep="")) %>%
   mutate(`P-value`=ifelse(.$P.val<0.05,"< 0.05","\u2265 0.05"),
@@ -36,18 +35,24 @@ full_plot_dat2 = Full_sim %>%
   mutate(Geostat = ifelse(Geostat=="Ordinary","Ordinary Kriging",'Universal Kriging')) 
 
 full_plot_dat2$`Polygon type`=factor(full_plot_dat2$`Polygon type`,
-                                     levels=c("Simulated","Congressional\r\ndistricts",
-                                              "Counties","State legislative\r\ndistricts (upper)",
-                                              "Wildlife\r\nmanagement areas",
-                                              "State legislative\r\ndistricts (lower)","County subdivisions",
+                                     levels=c("Simulated","Congressional\ndistricts",
+                                              "Counties","State legislative\ndistricts (upper)",
+                                              "State legislative\ndistricts (lower)","County subdivisions",
                                               "ZIP code\ntabulation areas","Census tracts"))
 full_plot_dat2$`P-value`=factor(full_plot_dat2$`P-value`,levels=c("< 0.05","\u2265 0.05"))
-palette1 =c("black",get_brewer_pal("Accent",n=9));palette1
-palette2 = c("black",'#7D449D','#B6B1C9','#EDBB99','#FEE791','#9BB5A4','#7FC97F','#E31864','#B35C20',"#666666")
+palette1 =c("black",get_brewer_pal("Accent",n=8));palette1
+palette2 = c("black",'#7FC97F','#BEAED4','#FDC086','#FFFF99','#386CB0','#F0027F','#BF5B17',"#666666")
 
-smaller_plot=ggplot(data=full_plot_dat2 %>% 
-                      arrange(`P-value`,`Polygon type`),aes(x=no_units,y=correlation))+
-  geom_point(aes(fill=`Polygon type`,size=`Polygon type`,color=`P-value`,alpha=`Polygon type`),shape=21,stroke=.75)+ # change colors to grey and black?
+arrange_data = full_plot_dat2 %>%
+  arrange(`P-value`,`Polygon type`)
+
+corr_plot=ggplot(data=arrange_data,
+                 aes(x=no_units,y=correlation))+
+  geom_point(aes(fill=`Polygon type`,
+                 size=`Polygon type`,
+                 color=`P-value`,
+                 alpha=`Polygon type`),
+              shape=21,stroke=.75)+
   scale_fill_manual(values=palette2)+
   scale_size_manual(values=c(1,4,4,4,4,4,4,4,4,4))+
   scale_color_manual(values=c('black','grey80'))+
@@ -61,9 +66,9 @@ smaller_plot=ggplot(data=full_plot_dat2 %>%
   theme_classic()+
   theme(legend.key.height = unit(.95,'cm'),
         #panel.grid.major = element_line(colour = "grey70", size = 0.2),
-        panel.background = element_rect(colour = 'grey70', size = 0.4));smaller_plot
+        panel.background = element_rect(colour = 'grey70', size = 0.4));corr_plot
 
 
 
- #  ggsave(smaller_plot,filename = paste(getwd(),"/Figures/Figure5.tiff",sep=""),
+ #  ggsave(corr_plot,filename = paste(getwd(),"/Figures/Corr_plot.pdf",sep=""),
   #          height=7,width=10,units='in',dpi=300)
