@@ -31,5 +31,5 @@ Moran_plot=ggplot(data=Moran_sim,aes(x=no_units,y=Moran))+
   theme_classic()+
   theme(panel.background = element_rect(colour = 'grey70', size = 0.4));Moran_plot
 
- #  ggsave(Moran_plot,filename = paste(getwd(),"/Figures/Morans_I_plot.tiff",sep=""),
+#   ggsave(Moran_plot,filename = paste(getwd(),"/Figures/Morans_I_plot.pdf",sep=""),
  #           height=4,width=7,units='in',dpi=300)
