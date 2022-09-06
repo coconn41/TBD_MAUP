@@ -1,0 +1,21 @@
+"","correlation","Geostat","P.val","no_units","Polygon type","P-value"
+"1",0.448173507342435,"Ordinary",4.71487992663246e-79,1583,"ZCTAs","< 0.05"
+"2",0.428891653261641,"Universal",7.61685004602978e-72,1583,"ZCTAs","< 0.05"
+"3",0.690480118658849,"Ordinary",2.7979465823174e-09,57,"Counties","< 0.05"
+"4",0.6743906133558,"Universal",8.85906396663045e-09,57,"Counties","< 0.05"
+"5",0.564876037857446,"Ordinary",3.35798175587574e-86,1010,"County subdivisions","< 0.05"
+"6",0.554269198900258,"Universal",2.07613626780308e-82,1010,"County subdivisions","< 0.05"
+"7",0.800640933733783,"Ordinary",9.42100594330268e-10,39,"State legislative
+districts (upper)","< 0.05"
+"8",0.742814013183158,"Universal",6.13911146509852e-08,39,"State legislative
+districts (upper)","< 0.05"
+"9",0.712270754029992,"Ordinary",2.11207615003992e-14,85,"State legislative
+districts (lower)","< 0.05"
+"10",0.685964144950336,"Universal",4.34571427655861e-13,85,"State legislative
+districts (lower)","< 0.05"
+"11",0.754302031111475,"Ordinary",0.000467922335222899,17,"Congressional
+districts","< 0.05"
+"12",0.69533379415162,"Universal",0.001942311425918,17,"Congressional
+districts","< 0.05"
+"13",0.451502244581755,"Ordinary",1.08720937049041e-137,2740,"Census tracts","< 0.05"
+"14",0.449440087270147,"Universal",2.65222860579423e-136,2740,"Census tracts","< 0.05"
