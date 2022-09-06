@@ -8,9 +8,13 @@ Var_sim <- read_csv(paste(getwd(),"/Results/Var_simulation.csv",sep=""))
 sds1=Var_sim %>%
   group_by(no_units,Variable,Voronoi_type) %>%
   summarize(mean=mean(variance,na.rm=T),
-            stdev=sd(variance,na.rm=T))
-sds1$ymax = sds1$mean+sds1$stdev
-sds1$ymin = sds1$mean-sds1$stdev
+            stdev=sd(variance,na.rm=T)) %>%
+  mutate(mean = ifelse(mean=="NaN",NA,mean),
+         stdev = ifelse(stdev=="NaN",NA,stdev),
+         ymax = ifelse(is.na(stdev)==T&is.na(mean)==F,mean,
+                       ifelse(is.na(mean)==T,NA,mean+stdev)),
+         ymin = ifelse(is.na(stdev)==T&is.na(mean)==F,mean,
+                       ifelse(is.na(mean)==T,NA,mean-stdev)))
 
 Var_sim$Field2 = ifelse(Var_sim$Variable=="OK_ERI","Ordinary Kriging ERI",
                         ifelse(Var_sim$Variable=="UK_ERI","Universal Kriging ERI",Var_sim$Variable))
@@ -45,5 +49,5 @@ Var_plot=ggplot(data=Var_sim,aes(x=no_units,y=log_var))+#change y=variance to go
   ylab("Variance")+
   theme_classic();Var_plot
 
-#  ggsave(Var_plot,filename = paste(getwd(),"/Figures/Variance_figs.tiff",sep=""),
+# ggsave(Var_plot,filename = paste(getwd(),"/Figures/Variance_plot.pdf",sep=""),
 #          height=8.5,width=5.5,units='in',dpi=300)
